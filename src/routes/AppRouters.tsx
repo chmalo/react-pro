@@ -1,45 +1,39 @@
-import {FC} from "react";
 import {BrowserRouter, Navigate, NavLink, Route, Routes} from "react-router-dom";
-import logo from "../assets/react.svg"
-import {About, Home, Users} from "../components";
+import logo from "../assets/react.svg";
+import {routes, Route as InterfaceRoute} from "./routes";
 
-interface Props {}
-
-export const AppRouters: FC<Props> = () => {
-
-
+export const AppRouters = () => {
     return (
         <BrowserRouter>
             <div className="main-layout">
                 <nav>
                     <img src={logo} alt="Logo react" />
                     <ul>
-                        <li>
-                            <NavLink to="/home"
-                                     className={({isActive}) => isActive ? 'nav-active' : ''}>
-                                Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/about"
-                                     className={({isActive}) => isActive ? 'nav-active' : ''}>
-                                About
-                            </NavLink>
-                        </li><li>
-                        <NavLink to="/users"
-                                 className={({isActive}) => isActive ? 'nav-active' : ''}>
-                            Users
-                        </NavLink>
-                    </li>
+                        {
+                            routes.map(({to, name}: InterfaceRoute) => (
+                            <li key={to}>
+                                <NavLink to={to}
+                                    className={({isActive}) =>
+                                        isActive ? 'nav-active' : ''}
+                                >
+                                    {name}
+                                </NavLink>
+                            </li>
+                            ))
+                        }
                     </ul>
                 </nav>
 
                 <Routes>
-                    <Route path="/about" element={<About />}/>
-                    <Route path="/users" element={<Users />}/>
-                    <Route path="/home" element={<Home />}/>
-
-                    <Route path="/*" element={<Navigate to="/home" replace /> }/>
+                    {
+                        routes.map(({path, Component}: InterfaceRoute) => (
+                            <Route key={path}
+                                path={path}
+                                element={<Component />}
+                            />
+                        ))
+                    }
+                    <Route path="/*" element={<Navigate to={routes[0].to} replace /> }/>
                 </Routes>
             </div>
         </BrowserRouter>
