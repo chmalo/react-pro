@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import {BrowserRouter, Navigate, NavLink, Route, Routes} from "react-router-dom";
 import logo from "../assets/react.svg";
-import {routes, Route as InterfaceRoute} from "./routes";
+import {routes} from "./routes";
+import {RouteLazyLoad} from "../interfaces";
 
 export const AppRouters = () => {
     return (
@@ -12,7 +13,7 @@ export const AppRouters = () => {
                         <img src={logo} alt="Logo react" />
                         <ul>
                             {
-                                routes.map(({to, name}: InterfaceRoute) => (
+                                routes.map(({to, name}: RouteLazyLoad) => (
                                     <li key={to}>
                                         <NavLink to={to}
                                                  className={({isActive}) =>
@@ -28,7 +29,7 @@ export const AppRouters = () => {
 
                     <Routes>
                         {
-                            routes.map(({path, Component}: InterfaceRoute) => (
+                            routes.map(({path, Component}: RouteLazyLoad) => (
                                 <Route key={path}
                                        path={path}
                                        element={<Component />}

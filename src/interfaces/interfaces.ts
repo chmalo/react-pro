@@ -1,3 +1,5 @@
+import {LazyExoticComponent} from "react";
+
 export interface CounterProps {}
 
 export interface CounterState {
@@ -13,4 +15,13 @@ export interface CounterByState {
 
 export interface Props {
     initialValue?: number;
+}
+
+export type JsxComponent = () => JSX.Element;
+
+export interface RouteLazyLoad {
+    to: string,
+    path: string,
+    Component: LazyExoticComponent<JsxComponent> | JsxComponent;
+    name: string
 }

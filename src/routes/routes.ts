@@ -1,18 +1,10 @@
-import {lazy, LazyExoticComponent} from "react";
+import {lazy} from "react";
 import {NoLazy} from "../lazyload/pages/NoLazy";
-
-type JsxComponent = () => JSX.Element;
-
-export interface Route {
-    to: string,
-    path: string,
-    Component: LazyExoticComponent<JsxComponent> | JsxComponent;
-    name: string
-}
+import {RouteLazyLoad} from "../interfaces";
 
 const LazyLayout = lazy(() => import('../lazyload/layout/LazyLayout'));
 
-export const routes: Route[] = [
+export const routes: RouteLazyLoad[] = [
     {
     to: '/lazyload/',
     path: '/lazyload/*',
