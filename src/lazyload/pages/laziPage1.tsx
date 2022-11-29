@@ -2,7 +2,7 @@ import {FC} from "react";
 
 interface Props {};
 
-const LaziPage1 = () => {
+export const LaziPage1 = () => {
     return (
         <>
             <h1>Lazi page 1</h1>
