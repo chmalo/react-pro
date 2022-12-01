@@ -8,7 +8,6 @@ function App() {
        {/* Bases*/}
        {/*<AppBasesCounter />*/}
 
-        {/* Primer proyecto (opcional)   */}
         <AppRouters />
     </>
   )
