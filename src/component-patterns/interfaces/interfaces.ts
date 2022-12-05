@@ -1,14 +1,25 @@
 import {FC, ReactElement} from "react";
 
 export interface ProductCardProps {
+    children?: ReactElement | ReactElement[],
+    className?: string
     product: ProductProps,
-    children?: ReactElement | ReactElement[]
 }
 
 export interface ProductProps {
     id: string,
-    title: string,
     img?: string
+    title: string,
+}
+
+export interface ProductTitleProps {
+    className?: string
+    title?: string,
+}
+
+export interface ProductImageProps {
+    className?: string
+    img?: string,
 }
 
 export interface ProductContextProps {
@@ -18,8 +29,8 @@ export interface ProductContextProps {
 }
 
 export interface ProductCardHOCProps {
-    ({children, product}: ProductCardProps): JSX.Element
-    Title: FC<{title?: string}>,
-    Image: FC<{img?: string}>,
+    ({children, product}: ProductCardProps): JSX.Element,
     Buttons: FC<{}>
+    Image: FC<{img?: string}>,
+    Title: FC<{title?: string}>,
 }
