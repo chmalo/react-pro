@@ -6,12 +6,12 @@ import {createContext} from "react";
 export const ProductContext = createContext({} as ProductContextProps);
 const {Provider} = ProductContext;
 
-export const ProductCard= ({children, product, className}: ProductCardProps ): JSX.Element => {
+export const ProductCard= ({children, product, className, style}: ProductCardProps ): JSX.Element => {
     const {counter, increaseBy} = useProduct();
 
     return (
         <Provider value={{counter, increaseBy, product}}>
-            <div className={`${styles.productCard} ${className}`}>
+            <div className={`${styles.productCard} ${className}`} style={style}>
                 { children }
             </div>
         </Provider>

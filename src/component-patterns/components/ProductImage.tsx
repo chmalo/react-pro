@@ -4,7 +4,7 @@ import styles from "../styles/styles.module.css";
 import {ProductContext} from "./ProductCard";
 import {ProductImageProps} from "../interfaces/interfaces";
 
-export const ProductImage: FC<ProductImageProps> = ({img = '', className}): JSX.Element => {
+export const ProductImage: FC<ProductImageProps> = ({img = '', className, style}): JSX.Element => {
     const {product} = useContext(ProductContext);
     let imgToShow: string;
 
@@ -17,6 +17,6 @@ export const ProductImage: FC<ProductImageProps> = ({img = '', className}): JSX.
     }
 
     return (
-        <img className={`${styles.productImg} ${className}`} src={ imgToShow } alt="Product" />
+        <img className={`${styles.productImg} ${className}`} src={ imgToShow } alt="Product" style={style}/>
     );
 }
