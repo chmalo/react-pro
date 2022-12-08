@@ -4,13 +4,28 @@ export interface ProductCardProps {
     children?: ReactElement | ReactElement[],
     className?: string
     product: ProductProps,
-    style?: CSSProperties
+    style?: CSSProperties,
+    onChange?: (args: onChangeArg) => void
+}
+
+export interface useProductProps {
+    product: ProductProps,
+    onChange?: (args: onChangeArg) => void
 }
 
 export interface ProductProps {
     id: string,
     img?: string
     title: string,
+}
+
+export interface ProductInCart extends ProductProps {
+    count: number
+}
+
+export interface onChangeArg {
+    product: ProductProps,
+    count: number
 }
 
 export interface ProductTitleProps {

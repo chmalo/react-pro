@@ -1,9 +1,9 @@
 import {lazy} from "react";
 import {NoLazy} from "../lazyload/pages/NoLazy";
 import {RouteLazyLoad} from "../interfaces";
-import {ShoppingPage} from "../component-patterns/pages/ShoppingPage";
 
 const LazyLayout = lazy(() => import('../lazyload/layout/LazyLayout'));
+const ShoppingPage = lazy(() => import('../component-patterns/pages/ShoppingPage'));
 
 export const routes: RouteLazyLoad[] = [
     {
