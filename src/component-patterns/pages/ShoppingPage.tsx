@@ -23,13 +23,20 @@ interface ProductStateCart {
 
 const ShoppingPage = () => {
 
-    const [shoppingCart, setShoppingCart, ] = useState<ProductStateCart>({
-        '1': {...product, count:0},
-        '2': {...product2, count:0}
-    });
+    const [shoppingCart, setShoppingCart] = useState<ProductStateCart>({});
 
     const onProductCountChange = ({product, count}: onChangeArg) => {
-        console.log('onProductCountChange', product, count)
+        setShoppingCart(oldshoppingCart => {
+            if(count === 0) {
+                const {[product.id]: toDelete, ...rest} = oldshoppingCart;
+                return rest
+            }
+
+            return {
+                ...oldshoppingCart,
+                [product.id]: {...product, count}
+            }
+        })
     }
 
     return (
@@ -42,6 +49,7 @@ const ShoppingPage = () => {
                         <ProductCard key={product.id}
                             product={product}
                             className="bg-dark text-white"
+                            value={shoppingCart[product.id]?.count || 0}
                             onChange={onProductCountChange}>
                             <ProductCard.Image className="custom-image"/>
                             <ProductCard.Title className="text-bold"/>
@@ -58,13 +66,20 @@ const ShoppingPage = () => {
             </div>
 
             <div className="shopping-cart">
-                <ProductCard product={product}
-                    className="bg-dark text-white"
-                    style={{width: '100px'}}
-                    onChange={onProductCountChange}>
-                    <ProductCard.Image className="custom-image"/>
-                    <ProductCard.Buttons className="custom-buttons"/>
-                </ProductCard>
+                {
+                    Object.entries(shoppingCart).map(([key, product]) => (
+                        <ProductCard key={key}
+                            product={product}
+                            className="bg-dark text-white"
+                            style={{width: '100px'}}
+                            value={product.count}
+                            onChange={onProductCountChange}>
+                            <ProductCard.Image className="custom-image"/>
+                            <ProductCard.Buttons className="custom-buttons"
+                                style={{display: 'flex', justifyContent: 'center'}}/>
+                        </ProductCard>
+                    ))
+                }
             </div>
         </div>
     );

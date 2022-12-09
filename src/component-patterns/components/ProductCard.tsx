@@ -6,8 +6,8 @@ import {createContext} from "react";
 export const ProductContext = createContext({} as ProductContextProps);
 const {Provider} = ProductContext;
 
-export const ProductCard= ({children, product, className, style, onChange}: ProductCardProps ): JSX.Element => {
-    const {counter, increaseBy} = useProduct({product, onChange});
+export const ProductCard= ({children, product, className, style, value, onChange}: ProductCardProps ): JSX.Element => {
+    const {counter, increaseBy} = useProduct({product, onChange, value});
 
     return (
         <Provider value={{counter, increaseBy, product}}>

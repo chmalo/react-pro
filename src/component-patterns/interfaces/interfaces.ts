@@ -5,12 +5,15 @@ export interface ProductCardProps {
     className?: string
     product: ProductProps,
     style?: CSSProperties,
+
+    value?: number,
     onChange?: (args: onChangeArg) => void
 }
 
 export interface useProductProps {
     product: ProductProps,
-    onChange?: (args: onChangeArg) => void
+    onChange?: (args: onChangeArg) => void,
+    value?: number,
 }
 
 export interface ProductProps {
