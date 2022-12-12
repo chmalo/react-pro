@@ -1,43 +1,11 @@
 import {ProductButtons, ProductCard, ProductImage, ProductTitle} from "../components";
+import {useShoppingCart} from "../hooks/useShoppingCart";
+import {products} from "../data/products";
 import '../styles/custom-styles.css';
-import {onChangeArg, ProductInCart, ProductProps} from "../interfaces/interfaces";
-import {useState} from "react";
-
-const product = {
-    id: '1',
-    img: './coffee-mug.png',
-    title: 'Coffee mug - Card'
-};
-
-const product2 = {
-    id: '2',
-    img: './coffee-mug2.png',
-    title: 'Coffee mug - Meme'
-};
-
-const products = [product, product2] as ProductProps[];
-
-interface ProductStateCart {
-    [key: string]: ProductInCart
-}
 
 const ShoppingPage = () => {
 
-    const [shoppingCart, setShoppingCart] = useState<ProductStateCart>({});
-
-    const onProductCountChange = ({product, count}: onChangeArg) => {
-        setShoppingCart(oldshoppingCart => {
-            if(count === 0) {
-                const {[product.id]: toDelete, ...rest} = oldshoppingCart;
-                return rest
-            }
-
-            return {
-                ...oldshoppingCart,
-                [product.id]: {...product, count}
-            }
-        })
-    }
+    const {shoppingCart, onProductCountChange} = useShoppingCart()
 
     return (
         <div>
@@ -58,7 +26,7 @@ const ShoppingPage = () => {
                     ))
                 }
 
-                <ProductCard product={product} style={{backgroundColor: '#70D1F8'}}>
+                <ProductCard product={products[0]} style={{backgroundColor: '#70D1F8'}}>
                     <ProductImage style={{borderRadius: '20px', width: 'calc(100% - 20px)', padding: '10px'}}/>
                     <ProductTitle style={{display: 'flex', justifyContent: 'center', fontWeight: 'bold'}}/>
                     <ProductButtons style={{display: 'flex', justifyContent: 'center'}}/>
