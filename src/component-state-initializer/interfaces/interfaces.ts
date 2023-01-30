@@ -1,7 +1,8 @@
 import {CSSProperties, FC, ReactElement} from "react";
 
 export interface ProductCardProps {
-    children?: ReactElement | ReactElement[],
+    // children?: ReactElement | ReactElement[] ,
+    children: (args : ProductCardHandlers) => JSX.Element
     className?: string
     product: ProductProps,
     style?: CSSProperties,
@@ -57,6 +58,7 @@ export interface ProductButtonsProps {
 
 export interface ProductContextProps {
     counter: number,
+    maxCount?: number
     product: ProductProps,
     increaseBy: (value: number) => void,
 }
@@ -66,4 +68,14 @@ export interface ProductCardHOCProps {
     Buttons: FC<ProductButtonsProps>
     Image: FC<ProductImageProps>,
     Title: FC<ProductTitleProps>,
+}
+
+export interface ProductCardHandlers {
+    count: number,
+    isMaxCountReached: boolean,
+    maxCount?: number,
+    product: ProductProps,
+
+    increaseBy: (value: number) => void,
+    reset: () => void,
 }

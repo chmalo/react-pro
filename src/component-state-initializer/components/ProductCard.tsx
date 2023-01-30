@@ -7,12 +7,27 @@ export const ProductContext = createContext({} as ProductContextProps);
 const {Provider} = ProductContext;
 
 export const ProductCard = ({children, product, className, style, value, onChange, initialValue}: ProductCardProps ): JSX.Element => {
-    const {counter, increaseBy} = useProduct({product, onChange, value, initialValue});
+    const {
+        counter,
+        increaseBy,
+        maxCount,
+        isMaxCountReached,
+        reset
+    } = useProduct({product, onChange, value, initialValue});
 
     return (
-        <Provider value={{counter, increaseBy, product}}>
+        <Provider value={{counter, increaseBy, product, maxCount}}>
             <div className={`${styles.productCard} ${className}`} style={style}>
-                { children }
+                {
+                    children({
+                        count: counter,
+                        isMaxCountReached,
+                        maxCount: initialValue?.maxCount,
+                        product,
+                        increaseBy,
+                        reset
+                    })
+                }
             </div>
         </Provider>
     );
